@@ -27,6 +27,7 @@ data class ConfigJsonTemplate(
             var enabled: Boolean,
             var antiBot: Boolean,
             var colour: TracersColours,
+            var yOffset: Float,
         ) {
             data class TracersColours(
                 var mode: String,
