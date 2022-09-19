@@ -31,6 +31,11 @@ fun methodDescParam(desc: String): String {
     return var1
 }
 
+/**
+ * For example:
+ *  input: pessspshpapahhheppesphphh()Lnet/minecraft/v1_8/asesphaeeshphahaaeseppaea;
+ *  output: Lnet/minecraft/v1_8/asesphaeeshphahaaeseppaea
+ */
 fun methodDescReturnType(desc: String): String {
     val firstParenthesis = desc.indexOf('(')
     val var0 = desc.substring(firstParenthesis + 1, desc.length - 1)

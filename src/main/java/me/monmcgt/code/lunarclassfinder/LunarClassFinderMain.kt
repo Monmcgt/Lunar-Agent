@@ -93,4 +93,8 @@ class LunarClassFinderMain {
             split[2] == mcpName.replace("/", ".")
         } ?: *//*throw RuntimeException("Cannot find $mcpName class")*//* "NULL_NULL_NULL").split(" ".toRegex(), 3)[1].replace("/", ".")*/
     }
+
+    fun getAllMinecraftClassesPatchName(): List<String> {
+        return mcpMappingFormat.map { it.patchName }
+    }
 }

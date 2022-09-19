@@ -16,6 +16,6 @@ import me.monmcgt.code.util.toChatMessage
 )
 object `BedwarsOverlay$Command$AutoQueue$Settings$Mode$Get` : CommandAbstract() {
     override fun execute() {
-        "${dark_aqua}AutoQueue ${pink}Mode ${yellow}is currently set to ${orange}${`BedwarsOverlay$Command$AutoQueue$Settings`.mode.alias}$yellow.".toChatMessage().addPrefix().printChat()
+        "${dark_aqua}AutoQueue ${pink}mode ${yellow}is currently set to ${orange}${`BedwarsOverlay$Command$AutoQueue$Settings`.mode.alias}$yellow.".toChatMessage().addPrefix().printChat()
     }
 }

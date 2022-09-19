@@ -495,6 +495,20 @@ public class LauncherMain implements Runnable {
         }
     }
 
+    public Object bridgeGetPlayer() throws NotReadyException {
+        this.checkReady();
+
+        Object var0 = this.getBridgeInterfaceObject();
+        Class<?> var1 = var0.getClass();
+        Method var2 = null;
+        try {
+            var2 = var1.getMethod("bridge$getPlayer");
+            return var2.invoke(var0);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public double[] getPlayerPos() throws NotReadyException {
         this.checkReady();
 

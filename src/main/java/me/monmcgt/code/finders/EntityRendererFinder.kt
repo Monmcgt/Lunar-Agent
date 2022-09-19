@@ -85,7 +85,8 @@ object EntityRendererFinder {
                         if (bufferedHelper.last.opcode == Opcodes.LDC) {
                             val ldc = LdcInsnNode::class.java.cast(bufferedHelper.last)
                             if (ldc.cst == "hand") {
-                                method.instructions.insertBefore(bufferedHelper.first, MethodInsnNode(Opcodes.INVOKESTATIC, "me/monmcgt/code/modules/ESP", "onRender", "()V", false))
+//                                method.instructions.insertBefore(bufferedHelper.first, MethodInsnNode(Opcodes.INVOKESTATIC, "me/monmcgt/code/modules/ESP", "onRender", "()V", false))
+                                method.instructions.insertBefore(bufferedHelper.first, MethodInsnNode(Opcodes.INVOKESTATIC, "me/monmcgt/code/modules/hook/RenderHook", "onRender", "()V", false))
                             }
                         }
                     }
