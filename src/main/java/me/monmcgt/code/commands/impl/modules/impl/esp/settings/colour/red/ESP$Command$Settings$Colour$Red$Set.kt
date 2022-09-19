@@ -24,6 +24,11 @@ object `ESP$Command$Settings$Colour$Red$Set` : CommandAbstract() {
             return
         }
 
+        if (value < 0 || value > 255) {
+            "${red}Please specify a valid value (0-255).".toChatMessage().addPrefix().printChat()
+            return
+        }
+
         `ESP$Command$Settings$Colour`.red = value
         printModuleSettingsValueMessage("ESP", "Colour (R)", value.toString())
     }
