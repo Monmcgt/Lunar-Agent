@@ -5,12 +5,15 @@ import me.monmcgt.code.commands.impl.modules.impl.tracers.`Tracers$Command`
 import me.monmcgt.code.commands.impl.modules.impl.tracers.settings.`Tracers$Command$Settings`
 import me.monmcgt.code.commands.impl.modules.impl.tracers.settings.colour.`Tracers$Command$Settings$Colour`
 import me.monmcgt.code.commands.impl.modules.util.ColourMode
+import me.monmcgt.code.config.ConfigManager
 import me.monmcgt.code.listeners.JoinLeaveServerEventListener
 import me.monmcgt.code.lunarbuiltinlauncher.LauncherMain
 import me.monmcgt.code.lunarbuiltinlauncher.entities.PlayerInfo
 import me.monmcgt.code.util.RenderUtils
 
 object Tracers {
+    val yOffset = ConfigManager.config.modules.tracersSettings.yOffset
+
     @JvmStatic
     fun onRender() {
         try {
@@ -57,7 +60,7 @@ object Tracers {
 
                 // POSITION
                 val posX = player.posX - renderPosX
-                val posY = player.posY - renderPosY
+                val posY = player.posY - renderPosY + yOffset
                 val posZ = player.posZ - renderPosZ
 
                 /*// colour (dynamic)

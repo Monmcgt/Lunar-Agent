@@ -9,7 +9,7 @@ import me.monmcgt.code.commands.impl.overlay.impl.autoqueue.settings.BedwarsMode
 import java.io.File
 import javax.swing.JOptionPane
 
-private val defaultTemplate = ConfigJsonTemplate(hypixelApiKey = "", ConfigJsonTemplate.Modules(espSettings = ConfigJsonTemplate.Modules.ESPSettings(enabled = false, antiBot = true, throughWall = true, colour = ConfigJsonTemplate.Modules.ESPSettings.ESPColours("dynamic", 0, 0, 0)), tracersSettings = ConfigJsonTemplate.Modules.TracersSettings(enabled = false, antiBot = true, colour = ConfigJsonTemplate.Modules.TracersSettings.TracersColours("dynamic", 0, 0, 0))), ConfigJsonTemplate.BedwarsOverlay(
+private val defaultTemplate = ConfigJsonTemplate(hypixelApiKey = "", ConfigJsonTemplate.Modules(espSettings = ConfigJsonTemplate.Modules.ESPSettings(enabled = false, antiBot = true, throughWall = true, colour = ConfigJsonTemplate.Modules.ESPSettings.ESPColours(mode = "static", red = 255, green = 255, blue = 255)), tracersSettings = ConfigJsonTemplate.Modules.TracersSettings(enabled = false, antiBot = true, colour = ConfigJsonTemplate.Modules.TracersSettings.TracersColours(mode = "dynamic", red = 0, green = 0, blue = 0), yOffset = 1.62F)), ConfigJsonTemplate.BedwarsOverlay(
     ConfigJsonTemplate.BedwarsOverlay.AutoQueue(delay = 5, mode = BedwarsMode.MODE_4v4.name, leaveIfNicked = true, fkdr = 0.8f, star = 200)))
 
 object ConfigManager {
