@@ -5,6 +5,8 @@ import me.monmcgt.code.bedwarsstatslunarinject.apis.ApiMainWrapper
 import me.monmcgt.code.commands.addPrefix
 import me.monmcgt.code.commands.impl.modules.impl.esp.`ESP$Command`
 import me.monmcgt.code.commands.impl.modules.impl.esp.settings.`ESP$Command$Settings`
+import me.monmcgt.code.commands.impl.modules.impl.tracers.`Tracers$Command`
+import me.monmcgt.code.commands.impl.modules.impl.tracers.settings.`Tracers$Command$Settings`
 import me.monmcgt.code.commands.impl.overlay.`BedwarsOverlay$Command`
 import me.monmcgt.code.commands.impl.overlay.impl.autoqueue.`BedwarsOverlay$Command$AutoQueue`
 import me.monmcgt.code.commands.printChat
@@ -29,11 +31,16 @@ object JoinLeaveServerEventListener {
             isHypixel = true
 //            `ESP$Command$Settings`.antiBotBackup = `ESP$Command$Settings`.antiBot
             `ESP$Command$Settings`.antiBotHypixel = true
+            `Tracers$Command$Settings`.antiBotHypixel = true
             val message = "${yellow}Automatically ${lime}enabled ${pink}Anti-Bot ${yellow}in ${dark_aqua}ESP${yellow} (Hypixel Profile)."
+            val message2 = "${yellow}Automatically ${lime}enabled ${pink}Anti-Bot ${yellow}in ${dark_aqua}Tracers${yellow} (Hypixel Profile)."
             Thread {
                 Thread.sleep(5000)
                 if (`ESP$Command`.enabled) {
                     message.toChatMessage().addPrefix().printChat()
+                }
+                if (`Tracers$Command`.enabled) {
+                    message2.toChatMessage().addPrefix().printChat()
                 }
             }.start()
             ValidateThread().start()
