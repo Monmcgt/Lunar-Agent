@@ -24,6 +24,11 @@ object `Tracers$Command$Settings$Colour$Green$Set` : CommandAbstract() {
             return
         }
 
+        if (value < 0 || value > 255) {
+            "${red}Please specify a valid value (0-255).".toChatMessage().addPrefix().printChat()
+            return
+        }
+
         `Tracers$Command$Settings$Colour`.green = value
         printModuleSettingsValueMessage("Tracers", "Colour (G)", value.toString())
     }
