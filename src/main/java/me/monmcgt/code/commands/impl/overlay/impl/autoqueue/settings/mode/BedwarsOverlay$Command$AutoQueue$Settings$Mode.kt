@@ -5,7 +5,7 @@ import me.monmcgt.code.commands.CommandInfo
 import me.monmcgt.code.util.checkModuleCommandArgsAndSetRunSubCommand
 
 @CommandInfo(
-    ["mode"],
+    ["mode", "m"],
 )
 class `BedwarsOverlay$Command$AutoQueue$Settings$Mode` : CommandAbstract() {
     override val subCommands: MutableList<CommandAbstract>

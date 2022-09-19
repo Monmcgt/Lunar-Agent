@@ -25,7 +25,7 @@ object `BedwarsOverlay$Command$AutoQueue$Settings$Mode$Set` : CommandAbstract() 
             printAvailableModes()
         } else {
             `BedwarsOverlay$Command$AutoQueue$Settings`.mode = mode
-            "${yellow}Mode set to $orange${mode.name}${reset}".toChatMessage().addPrefix().printChat()
+            "${yellow}Mode set to $orange${mode.alias}${reset}".toChatMessage().addPrefix().printChat()
         }
     }
 

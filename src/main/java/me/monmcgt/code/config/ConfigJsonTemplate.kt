@@ -7,12 +7,34 @@ data class ConfigJsonTemplate(
 ) {
     data class Modules(
         var espSettings: ESPSettings,
+        var tracersSettings: TracersSettings,
     ) {
         data class ESPSettings(
             var enabled: Boolean,
             var antiBot: Boolean,
             var throughWall: Boolean,
-        )
+            var colour: ESPColours,
+        ) {
+            data class ESPColours(
+                var mode: String,
+                var red: Int,
+                var green: Int,
+                var blue: Int,
+            )
+        }
+
+        data class TracersSettings(
+            var enabled: Boolean,
+            var antiBot: Boolean,
+            var colour: TracersColours,
+        ) {
+            data class TracersColours(
+                var mode: String,
+                var red: Int,
+                var green: Int,
+                var blue: Int,
+            )
+        }
     }
 
     data class BedwarsOverlay(

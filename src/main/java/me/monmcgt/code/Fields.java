@@ -8,6 +8,8 @@ public class Fields {
     public static volatile String EVENT_JOIN_SERVER_CLASS_NAME;
     public static volatile String EVENT_LEAVE_SERVER_CLASS_NAME;
 
+    public static volatile Class<?> TESSELLATOR_CLASS;
+
     public static volatile Class<?> RENDER_GLOBAL_CLASS;
 //    public static volatile Method func_181561_a;
     public static volatile String func_181561_a_name;

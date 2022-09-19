@@ -3,6 +3,7 @@ package me.monmcgt.code.commands.impl.modules
 import me.monmcgt.code.commands.CommandAbstract
 import me.monmcgt.code.commands.CommandInfo
 import me.monmcgt.code.commands.impl.modules.impl.esp.`ESP$Command`
+import me.monmcgt.code.commands.impl.modules.impl.tracers.`Tracers$Command`
 import me.monmcgt.code.util.checkModuleCommandArgs
 
 @CommandInfo(
@@ -11,7 +12,8 @@ import me.monmcgt.code.util.checkModuleCommandArgs
 class Modules : CommandAbstract() {
     override val subCommands: MutableList<CommandAbstract>
         get() = mutableListOf(
-            `ESP$Command`()
+            `ESP$Command`(),
+            `Tracers$Command`(),
         )
 
     override fun execute() {
