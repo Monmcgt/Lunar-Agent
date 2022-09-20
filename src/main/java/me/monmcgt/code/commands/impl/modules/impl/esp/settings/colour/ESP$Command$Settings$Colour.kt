@@ -2,9 +2,9 @@ package me.monmcgt.code.commands.impl.modules.impl.esp.settings.colour
 
 import me.monmcgt.code.commands.CommandAbstract
 import me.monmcgt.code.commands.CommandInfo
+import me.monmcgt.code.commands.impl.modules.impl.esp.settings.colour.blue.`ESP$Command$Settings$Colour$Blue`
+import me.monmcgt.code.commands.impl.modules.impl.esp.settings.colour.green.`ESP$Command$Settings$Colour$Green`
 import me.monmcgt.code.commands.impl.modules.impl.esp.settings.colour.mode.`ESP$Command$Settings$Mode`
-import me.monmcgt.code.commands.impl.modules.impl.esp.settings.colour.red.`ESP$Command$Settings$Colour$Blue`
-import me.monmcgt.code.commands.impl.modules.impl.esp.settings.colour.red.`ESP$Command$Settings$Colour$Green`
 import me.monmcgt.code.commands.impl.modules.impl.esp.settings.colour.red.`ESP$Command$Settings$Colour$Red`
 import me.monmcgt.code.commands.impl.modules.util.ColourMode
 import me.monmcgt.code.config.ConfigManager
