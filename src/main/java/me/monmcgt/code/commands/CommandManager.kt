@@ -9,6 +9,7 @@ import me.monmcgt.code.commands.impl.config.api.`ApiKey$Command`
 import me.monmcgt.code.commands.impl.debug.`Debug$Command`
 import me.monmcgt.code.commands.impl.modules.Modules
 import me.monmcgt.code.commands.impl.overlay.`BedwarsOverlay$Command`
+import me.monmcgt.code.commands.impl.server.`Server$Command`
 import me.monmcgt.code.commands.impl.test.Test1
 import me.monmcgt.code.commands.impl.test.Test2
 import me.monmcgt.code.commands.impl.test.Test3
@@ -105,6 +106,7 @@ object CommandManager {
             Modules(),
             `BedwarsOverlay$Command`(),
             `ApiKey$Command`(),
+            `Server$Command`,
 
             Test1(),
             Test2(),
