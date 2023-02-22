@@ -1,6 +1,5 @@
 package me.monmcgt.code.modules
 
-import me.monmcgt.code.commands.impl.modules.impl.esp.settings.`ESP$Command$Settings$AntiBot`
 import me.monmcgt.code.commands.impl.modules.impl.tracers.`Tracers$Command`
 import me.monmcgt.code.commands.impl.modules.impl.tracers.settings.`Tracers$Command$Settings`
 import me.monmcgt.code.commands.impl.modules.impl.tracers.settings.colour.`Tracers$Command$Settings$Colour`
@@ -10,6 +9,7 @@ import me.monmcgt.code.listeners.JoinLeaveServerEventListener
 import me.monmcgt.code.lunarbuiltinlauncher.LauncherMain
 import me.monmcgt.code.lunarbuiltinlauncher.entities.PlayerInfo
 import me.monmcgt.code.util.RenderUtils
+import me.monmcgt.code.util.isBot
 
 object Tracers {
     val yOffset = ConfigManager.config.modules.tracersSettings.yOffset
@@ -37,14 +37,20 @@ object Tracers {
 
                 if (JoinLeaveServerEventListener.isHypixel) {
                     if (`Tracers$Command$Settings`.antiBotHypixel) {
-                        if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                        /*if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                            isBot = true
+                        }*/
+                        if (player.isBot()) {
                             isBot = true
                         }
                     }
                 } else {
                     if (`Tracers$Command$Settings`.antiBot) {
-                        if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                        /*if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
 //                        continue
+                            isBot = true
+                        }*/
+                        if (player.isBot()) {
                             isBot = true
                         }
                     }
