@@ -5,7 +5,6 @@ import me.monmcgt.code.Fields
 import me.monmcgt.code.bedwarsstatslunarinject.threads.PlayerWatchedThread
 import me.monmcgt.code.commands.impl.modules.impl.esp.`ESP$Command`
 import me.monmcgt.code.commands.impl.modules.impl.esp.settings.`ESP$Command$Settings`
-import me.monmcgt.code.commands.impl.modules.impl.esp.settings.`ESP$Command$Settings$AntiBot`
 import me.monmcgt.code.commands.impl.modules.impl.esp.settings.colour.`ESP$Command$Settings$Colour`
 import me.monmcgt.code.commands.impl.modules.util.ColourMode
 import me.monmcgt.code.finders.MessageEventClassFinder
@@ -14,6 +13,7 @@ import me.monmcgt.code.lunarbuiltinlauncher.LauncherMain
 import me.monmcgt.code.lunarbuiltinlauncher.entities.PlayerInfo
 import me.monmcgt.code.lunarclassfinder.LunarClassFinderMain
 import me.monmcgt.code.lunarclassfinder.invokeStatic
+import me.monmcgt.code.util.isBot
 import org.lwjgl.opengl.GL11
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
@@ -263,14 +263,20 @@ object ESP {
 
                 if (JoinLeaveServerEventListener.isHypixel) {
                     if (`ESP$Command$Settings`.antiBotHypixel) {
-                        if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                        /*if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                            isBot = true
+                        }*/
+                        if (player.isBot()) {
                             isBot = true
                         }
                     }
                 } else {
                     if (`ESP$Command$Settings`.antiBot) {
-                        if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                        /*if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
 //                        continue
+                            isBot = true
+                        }*/
+                        if (player.isBot()) {
                             isBot = true
                         }
                     }
@@ -508,14 +514,20 @@ object ESP {
 
                 if (JoinLeaveServerEventListener.isHypixel) {
                     if (`ESP$Command$Settings`.antiBotHypixel) {
-                        if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                        /*if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                            isBot = true
+                        }*/
+                        if (player.isBot()) {
                             isBot = true
                         }
                     }
                 } else {
                     if (`ESP$Command$Settings`.antiBot) {
-                        if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                        /*if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
 //                        continue
+                            isBot = true
+                        }*/
+                        if (player.isBot()) {
                             isBot = true
                         }
                     }
@@ -751,14 +763,20 @@ object ESP {
 
                 if (JoinLeaveServerEventListener.isHypixel) {
                     if (`ESP$Command$Settings`.antiBotHypixel) {
-                        if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                        /*if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                            isBot = true
+                        }*/
+                        if (player.isBot()) {
                             isBot = true
                         }
                     }
                 } else {
                     if (`ESP$Command$Settings`.antiBot) {
-                        if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
+                        /*if (`ESP$Command$Settings$AntiBot`.isBot(player.name)) {
 //                        continue
+                            isBot = true
+                        }*/
+                        if (player.isBot()) {
                             isBot = true
                         }
                     }

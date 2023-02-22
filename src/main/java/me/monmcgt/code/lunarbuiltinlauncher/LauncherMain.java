@@ -2,6 +2,8 @@ package me.monmcgt.code.lunarbuiltinlauncher;
 
 import me.monmcgt.code.Debug;
 import me.monmcgt.code.Fields;
+import me.monmcgt.code.lunarbuiltinlauncher.entities.BoundingBox;
+import me.monmcgt.code.lunarbuiltinlauncher.entities.LookAngle;
 import me.monmcgt.code.lunarbuiltinlauncher.entities.Player;
 import me.monmcgt.code.lunarbuiltinlauncher.entities.PlayerInfo;
 import me.monmcgt.code.lunarbuiltinlauncher.exceptions.NotReadyException;
@@ -12,10 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class LauncherMain implements Runnable {
     public static LauncherMain INSTANCE;
@@ -371,12 +370,60 @@ public class LauncherMain implements Runnable {
                 boolean isInvisible = (boolean) var9.getMethod("bridge$isInvisible").invoke(mySelf);
                 //                    System.out.println("MySelf: " + playerName);
                 //                    System.out.println("MySelf: " + playerName + " Pos: " + pos[0] + " " + pos[1] + " " + pos[2] + " Yaw: " + pos[3] + " Pitch: " + pos[4]);
-                PlayerInfo player = new PlayerInfo(playerName, pos[0], pos[1], pos[2], pos[3], pos[4], isInvisible, isInvisible);
-                players.add(player);
+
+                try {
+                    boolean isSneaking = (boolean) var9.getMethod("bridge$isSneaking").invoke(mySelf);
+                    boolean isRiding = (boolean) var9.getMethod("bridge$isRiding").invoke(mySelf);
+                    int ticksExisted = (int) var9.getMethod("bridge$getTicksExisted").invoke(mySelf);
+                    double previousPosX = (double) var9.getMethod("bridge$getPreviousPosX").invoke(mySelf);
+                    double previousPosY = (double) var9.getMethod("bridge$getPreviousPosY").invoke(mySelf);
+                    double previousPosZ = (double) var9.getMethod("bridge$getPreviousPosZ").invoke(mySelf);
+                    double motionX = (double) var9.getMethod("bridge$getMotionX").invoke(mySelf);
+                    double motionY = (double) var9.getMethod("bridge$getMotionY").invoke(mySelf);
+                    double motionZ = (double) var9.getMethod("bridge$getMotionZ").invoke(mySelf);
+                    double previousRotationYaw = (double) var9.getMethod("bridge$getPreviousRotationYaw").invoke(mySelf);
+                    double previousRotationPitch = (double) var9.getMethod("bridge$getPreviousRotationPitch").invoke(mySelf);
+                    UUID uniqueID = (UUID) var9.getMethod("bridge$getUniqueID").invoke(mySelf);
+
+                    Object var14Instance = var9.getMethod("bridge$getBoundingBox").invoke(mySelf);
+                    Class<?> var14Class = var14Instance.getClass();
+                    double v14MinX = (double) var14Class.getMethod("bridge$getMinX").invoke(var14Instance);
+                    double v14MinY = (double) var14Class.getMethod("bridge$getMinY").invoke(var14Instance);
+                    double v14MinZ = (double) var14Class.getMethod("bridge$getMinZ").invoke(var14Instance);
+                    double v14MaxX = (double) var14Class.getMethod("bridge$getMaxX").invoke(var14Instance);
+                    double v14MaxY = (double) var14Class.getMethod("bridge$getMaxY").invoke(var14Instance);
+                    double v14MaxZ = (double) var14Class.getMethod("bridge$getMaxZ").invoke(var14Instance);
+                    BoundingBox boundingBox = new BoundingBox(var14Instance, v14MinX, v14MinY, v14MinZ, v14MaxX, v14MaxY, v14MaxZ);
+
+                    boolean isOnGround = (boolean) var9.getMethod("bridge$isOnGround").invoke(mySelf);
+                    int entityId = (int) var9.getMethod("bridge$getEntityId").invoke(mySelf);
+                    LookAngle lookAngle = LookAngle.migrateObject(var9.getMethod("bridge$getLookAngle").invoke(mySelf));
+                    int dimension = (int) var9.getMethod("bridge$getDimension").invoke(mySelf);
+                    float eyeHeight = (float) var9.getMethod("bridge$getEyeHeight").invoke(mySelf);
+                    float fallDistance = (float) var9.getMethod("bridge$getFallDistance").invoke(mySelf);
+                    double lastTickX = (double) var9.getMethod("bridge$getLastTickX").invoke(mySelf);
+                    double lastTickY = (double) var9.getMethod("bridge$getLastTickY").invoke(mySelf);
+                    double lastTickZ = (double) var9.getMethod("bridge$getLastTickZ").invoke(mySelf);
+                    boolean isBurning = (boolean) var9.getMethod("bridge$isBurning").invoke(mySelf);
+                    float width = (float) var9.getMethod("bridge$getWidth").invoke(mySelf);
+                    boolean isCollidedHorizontally = (boolean) var9.getMethod("bridge$isCollidedHorizontally").invoke(mySelf);
+                    boolean isDead = (boolean) var9.getMethod("bridge$isDead").invoke(mySelf);
+                    boolean isVisiblyCrouching = (boolean) var9.getMethod("bridge$isVisiblyCrouching").invoke(mySelf);
+
+//                    PlayerInfo player = new PlayerInfo(playerName, pos[0], pos[1], pos[2], pos[3], pos[4], isInvisible, isInvisible);
+                    PlayerInfo player = new PlayerInfo(playerName, pos[0], pos[1], pos[2], pos[3], pos[4], isInvisible, isInvisible, isSneaking, isRiding, ticksExisted, previousPosX, previousPosY, previousPosZ, motionX, motionY, motionZ, previousRotationYaw, previousRotationPitch, uniqueID, boundingBox, isOnGround, entityId, lookAngle, dimension, eyeHeight, fallDistance, lastTickX, lastTickY, lastTickZ, isBurning, width, isCollidedHorizontally, isDead, isVisiblyCrouching);
+                    players.add(player);
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException |
+                         NoSuchMethodException | SecurityException e) {
+                    e.printStackTrace();
+
+                    PlayerInfo player = new PlayerInfo(playerName, pos[0], pos[1], pos[2], pos[3], pos[4], isInvisible, isInvisible);
+                    players.add(player);
+                }
             }
 
             if (mySelf != null && others.size() > 0) {
-                Class<?> var11 = others.get(0).getClass();
+                 Class<?> var11 = others.get(0).getClass();
                 Class<?> isInvisibleToParamClass = null;
                 Method[] methods = var11.getMethods();
 //                boolean found = false;
@@ -406,7 +453,8 @@ public class LauncherMain implements Runnable {
                     for (Object var13 : others) {
                         boolean isInvisToMyself = (boolean) var12.invoke(var13, mySelf);
                         boolean isInvis = (boolean) var12_1.invoke(var13);
-                        String nameClear = var13.getClass().getField("nameClear").get(var13).toString();
+                        Class<?> var13Class = var13.getClass();
+                        String nameClear = var13Class.getField("nameClear").get(var13).toString();
                         /*if (nameClear.isEmpty()) {
                             nameClear = "!Unknown!";
                         }*/
@@ -415,13 +463,52 @@ public class LauncherMain implements Runnable {
                         } else {
                             System.out.println("Player: " + nameClear + " is visible to me");
                         }*/
-                        double posX = (double) var13.getClass().getMethod("bridge$getPosX").invoke(var13);
-                        double posY = (double) var13.getClass().getMethod("bridge$getPosY").invoke(var13);
-                        double posZ = (double) var13.getClass().getMethod("bridge$getPosZ").invoke(var13);
-                        double yaw = (double) var13.getClass().getMethod("bridge$getRotationYaw").invoke(var13);
-                        double pitch = (double) var13.getClass().getMethod("bridge$getRotationPitch").invoke(var13);
+                        double posX = (double) var13Class.getMethod("bridge$getPosX").invoke(var13);
+                        double posY = (double) var13Class.getMethod("bridge$getPosY").invoke(var13);
+                        double posZ = (double) var13Class.getMethod("bridge$getPosZ").invoke(var13);
+                        double yaw = (double) var13Class.getMethod("bridge$getRotationYaw").invoke(var13);
+                        double pitch = (double) var13Class.getMethod("bridge$getRotationPitch").invoke(var13);
 
-                        PlayerInfo player = new PlayerInfo(nameClear, posX, posY, posZ, yaw, pitch, isInvisToMyself, isInvis);
+                        boolean isSneaking = (boolean) var13Class.getMethod("bridge$isSneaking").invoke(var13);
+                        boolean isRiding = (boolean) var13Class.getMethod("bridge$isRiding").invoke(var13);
+                        int ticksExisted = (int) var13Class.getMethod("bridge$getTicksExisted").invoke(var13);
+                        double previousPosX = (double) var13Class.getMethod("bridge$getPreviousPosX").invoke(var13);
+                        double previousPosY = (double) var13Class.getMethod("bridge$getPreviousPosY").invoke(var13);
+                        double previousPosZ = (double) var13Class.getMethod("bridge$getPreviousPosZ").invoke(var13);
+                        double motionX = (double) var13Class.getMethod("bridge$getMotionX").invoke(var13);
+                        double motionY = (double) var13Class.getMethod("bridge$getMotionY").invoke(var13);
+                        double motionZ = (double) var13Class.getMethod("bridge$getMotionZ").invoke(var13);
+                        double previousRotationYaw = (double) var13Class.getMethod("bridge$getPreviousRotationYaw").invoke(var13);
+                        double previousRotationPitch = (double) var13Class.getMethod("bridge$getPreviousRotationPitch").invoke(var13);
+                        UUID uniqueID = (UUID) var13Class.getMethod("bridge$getUniqueID").invoke(var13);
+
+                        Object var14Instance = var13Class.getMethod("bridge$getBoundingBox").invoke(var13);
+                        Class<?> var14Class = var14Instance.getClass();
+                        double v14MinX = (double) var14Class.getMethod("bridge$getMinX").invoke(var14Instance);
+                        double v14MinY = (double) var14Class.getMethod("bridge$getMinY").invoke(var14Instance);
+                        double v14MinZ = (double) var14Class.getMethod("bridge$getMinZ").invoke(var14Instance);
+                        double v14MaxX = (double) var14Class.getMethod("bridge$getMaxX").invoke(var14Instance);
+                        double v14MaxY = (double) var14Class.getMethod("bridge$getMaxY").invoke(var14Instance);
+                        double v14MaxZ = (double) var14Class.getMethod("bridge$getMaxZ").invoke(var14Instance);
+                        BoundingBox boundingBox = new BoundingBox(var14Instance, v14MinX, v14MinY, v14MinZ, v14MaxX, v14MaxY, v14MaxZ);
+
+                        boolean isOnGround = (boolean) var13Class.getMethod("bridge$isOnGround").invoke(var13);
+                        int entityId = (int) var13Class.getMethod("bridge$getEntityId").invoke(var13);
+                        LookAngle lookAngle = LookAngle.migrateObject(var13Class.getMethod("bridge$getLookAngle").invoke(var13));
+                        int dimension = (int) var13Class.getMethod("bridge$getDimension").invoke(var13);
+                        float eyeHeight = (float) var13Class.getMethod("bridge$getEyeHeight").invoke(var13);
+                        float fallDistance = (float) var13Class.getMethod("bridge$getFallDistance").invoke(var13);
+                        double lastTickX = (double) var13Class.getMethod("bridge$lastTickX").invoke(var13);
+                        double lastTickY = (double) var13Class.getMethod("bridge$lastTickY").invoke(var13);
+                        double lastTickZ = (double) var13Class.getMethod("bridge$lastTickZ").invoke(var13);
+                        boolean isBurning = (boolean) var13Class.getMethod("bridge$isBurning").invoke(var13);
+                        float width = (float) var13Class.getMethod("bridge$getWidth").invoke(var13);
+                        boolean isCollidedHorizontally = (boolean) var13Class.getMethod("bridge$isCollidedHorizontally").invoke(var13);
+                        boolean isDead = (boolean) var13Class.getMethod("bridge$isDead").invoke(var13);
+                        boolean isVisiblyCrouching = (boolean) var13Class.getMethod("bridge$isVisiblyCrouching").invoke(var13);
+
+//                        PlayerInfo player = new PlayerInfo(nameClear, posX, posY, posZ, yaw, pitch, isInvisToMyself, isInvis);
+                        PlayerInfo player = new PlayerInfo(nameClear, posX, posY, posZ, yaw, pitch, isInvisToMyself, isInvis, isSneaking, isRiding, ticksExisted, previousPosX, previousPosY, previousPosZ, motionX, motionY, motionZ, previousRotationYaw, previousRotationPitch, uniqueID, boundingBox, isOnGround, entityId, lookAngle, dimension, eyeHeight, fallDistance, lastTickX, lastTickY, lastTickZ, isBurning, width, isCollidedHorizontally, isDead, isVisiblyCrouching);
                         players.add(player);
                     }
                 }
@@ -431,6 +518,52 @@ public class LauncherMain implements Runnable {
         }
 
         return players;
+
+        /*
+        java.lang.RuntimeException: java.lang.NoSuchMethodException: net.minecraft.v1_8.shesshspppsepeheahppsahse.bridge$getLastTickX()
+        at me.monmcgt.code.lunarbuiltinlauncher.LauncherMain.getPlayerEntitiesListInfo(LauncherMain.java:517)
+        at me.monmcgt.code.modules.ESP.onRender2(ESP.kt:756)
+        at me.monmcgt.code.modules.hook.RenderHook.onRender(RenderHook.java:8)
+        at net.minecraft.v1_8.apahpshsshhaaasahseahappa.heaeahsapapeaepaspesapeph(EntityRenderer.java:1932)
+        at net.minecraft.v1_8.apahpshsshhaaasahseahappa.apeeasahephahesshaespahph(EntityRenderer.java:1587)
+        at net.minecraft.v1_8.apahpshsshhaaasahseahappa.ashsehsshhhpeahphpppahsps(EntityRenderer.java:1377)
+        at net.minecraft.v1_8.epaphassaaphhaaeepsssapap.esaphsesseaehppehhhaaesha(SourceFile:915)
+        at net.minecraft.v1_8.epaphassaaphhaaeepsssapap.aaepahssaesesaeppspshespp(SourceFile:325)
+        at net.minecraft.client.main.Main.main(SourceFile:124)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+        at com.moonsworth.lunar.patcher.LunarMain.main(Unknown Source)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+        at me.monmcgt.code.lunarbuiltinlauncher.Main.run(Main.java:431)
+        at java.base/java.lang.Thread.run(Thread.java:831)
+Caused by: java.lang.NoSuchMethodException: net.minecraft.v1_8.shesshspppsepeheahppsahse.bridge$getLastTickX()
+        at java.base/java.lang.Class.getMethod(Class.java:2195)
+        at me.monmcgt.code.lunarbuiltinlauncher.LauncherMain.getPlayerEntitiesListInfo(LauncherMain.java:501)
+        ... 19 more
+java.lang.NoSuchMethodException: net.minecraft.v1_8.epahhssheeapaahahahheshah.bridge$getLastTickX()
+        at java.base/java.lang.Class.getMethod(Class.java:2195)
+        at me.monmcgt.code.lunarbuiltinlauncher.LauncherMain.getPlayerEntitiesListInfo(LauncherMain.java:404)
+        at me.monmcgt.code.modules.ESP.onRender2(ESP.kt:756)
+        at me.monmcgt.code.modules.hook.RenderHook.onRender(RenderHook.java:8)
+        at net.minecraft.v1_8.apahpshsshhaaasahseahappa.heaeahsapapeaepaspesapeph(EntityRenderer.java:1932)
+        at net.minecraft.v1_8.apahpshsshhaaasahseahappa.apeeasahephahesshaespahph(EntityRenderer.java:1587)
+        at net.minecraft.v1_8.apahpshsshhaaasahseahappa.ashsehsshhhpeahphpppahsps(EntityRenderer.java:1377)
+        at net.minecraft.v1_8.epaphassaaphhaaeepsssapap.esaphsesseaehppehhhaaesha(SourceFile:915)
+        at net.minecraft.v1_8.epaphassaaphhaaeepsssapap.aaepahssaesesaeppspshespp(SourceFile:325)
+        at net.minecraft.client.main.Main.main(SourceFile:124)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+        at com.moonsworth.lunar.patcher.LunarMain.main(Unknown Source)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.bas
+        */
     }
 
     public void getPlayerInfoMap() throws NotReadyException {
