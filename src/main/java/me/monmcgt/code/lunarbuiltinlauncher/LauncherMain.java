@@ -252,6 +252,7 @@ public class LauncherMain implements Runnable {
             Class<?> var4 = var3.getClass();
             Method var5 = var4.getMethod("bridge$getPlayerEntities");
             Object var6 = var5.invoke(var3);
+            // wn net.minecraft.v1_8.sppseepppaahapphsaesassea net/minecraft/entity/player/EntityPlayer
 
             return var6;
 
@@ -401,9 +402,9 @@ public class LauncherMain implements Runnable {
                     int dimension = (int) var9.getMethod("bridge$getDimension").invoke(mySelf);
                     float eyeHeight = (float) var9.getMethod("bridge$getEyeHeight").invoke(mySelf);
                     float fallDistance = (float) var9.getMethod("bridge$getFallDistance").invoke(mySelf);
-                    double lastTickX = (double) var9.getMethod("bridge$getLastTickX").invoke(mySelf);
-                    double lastTickY = (double) var9.getMethod("bridge$getLastTickY").invoke(mySelf);
-                    double lastTickZ = (double) var9.getMethod("bridge$getLastTickZ").invoke(mySelf);
+                    double lastTickX = (double) var9.getMethod("bridge$lastTickX").invoke(mySelf);
+                    double lastTickY = (double) var9.getMethod("bridge$lastTickY").invoke(mySelf);
+                    double lastTickZ = (double) var9.getMethod("bridge$lastTickZ").invoke(mySelf);
                     boolean isBurning = (boolean) var9.getMethod("bridge$isBurning").invoke(mySelf);
                     float width = (float) var9.getMethod("bridge$getWidth").invoke(mySelf);
                     boolean isCollidedHorizontally = (boolean) var9.getMethod("bridge$isCollidedHorizontally").invoke(mySelf);
