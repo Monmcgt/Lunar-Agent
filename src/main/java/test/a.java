@@ -18,8 +18,8 @@ public class a {
         }
 
         if (n.length() == 10) {
-            int num = 0;
-            int let = 0;
+            int numberCount = 0;
+            int letterCount = 0;
             char[] var4 = n.toCharArray();
 
             for (char c : var4) {
@@ -28,17 +28,17 @@ public class a {
                         return false;
                     }
 
-                    ++let;
+                    ++letterCount;
                 } else {
                     if (!Character.isDigit(c)) {
                         return false;
                     }
 
-                    ++num;
+                    ++numberCount;
                 }
             }
 
-            return num >= 2 && let >= 2;
+            return numberCount >= 2 && letterCount >= 2;
         }
 
         return false;

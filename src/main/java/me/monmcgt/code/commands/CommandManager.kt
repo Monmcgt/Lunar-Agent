@@ -13,6 +13,7 @@ import me.monmcgt.code.commands.impl.server.`Server$Command`
 import me.monmcgt.code.commands.impl.test.Test1
 import me.monmcgt.code.commands.impl.test.Test2
 import me.monmcgt.code.commands.impl.test.Test3
+import me.monmcgt.code.commands.impl.test.Test4
 import me.monmcgt.code.helpers.*
 import me.monmcgt.code.util.ClassScanner
 import java.util.concurrent.Executors
@@ -111,6 +112,7 @@ object CommandManager {
             Test1(),
             Test2(),
             Test3(),
+            Test4,
 
             `Debug$Command`(),
 
