@@ -1,5 +1,5 @@
 # Lunar-Agent
-An java agent for improving LunarClient experience.
+A java agent for improving LunarClient experience.
 <strong>Only works for version `1.8.9-b4db1c9/master`).</strong>
 <br>
 <br>
@@ -31,8 +31,8 @@ The image above is only for showcasing the modules!
 <br>
 
 ### Commands' Aliases
-Take a look at `@me.monmcgt.code.commands.CommandInfo` those files that extend `me.monmcgt.code.commands.CommandAbstract` (e.g. <a href="https://github.com/Monmcgt/Lunar-Agent/blob/cc9ba6aaf0e052e3510540d990f710ff23a57af5/src/main/java/me/monmcgt/code/commands/impl/overlay/BedwarsOverlay%24Command.kt#L17">BedwarsOverlay$Command.kt</a>
-#### For Example: `/lunaragent bedwars` can be shorten to `/la bw`
+Take a look at `@me.monmcgt.code.commands.CommandInfo` in those files that extend `me.monmcgt.code.commands.CommandAbstract` (e.g. <a href="https://github.com/Monmcgt/Lunar-Agent/blob/cc9ba6aaf0e052e3510540d990f710ff23a57af5/src/main/java/me/monmcgt/code/commands/impl/overlay/BedwarsOverlay%24Command.kt#L17">BedwarsOverlay$Command.kt</a>
+#### For Example: `/lunaragent bedwars` can be shortened to `/la bw`
 
 <br>
 
@@ -45,3 +45,4 @@ Take a look at `@me.monmcgt.code.commands.CommandInfo` those files that extend `
 <li>Easy-to-understand Command System</li>
 <li>MCP <-> Lunar Mappings Converter</li>
 <li><a href="https://github.com/Monmcgt/Lunar-Agent/tree/master/src/main/java/me/monmcgt/code">...</a></li>
+</ul>
