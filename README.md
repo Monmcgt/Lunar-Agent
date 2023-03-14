@@ -31,7 +31,7 @@ The image above is only for showcasing the modules!
 <br>
 
 ### Commands' Aliases
-Take a look at `@me.monmcgt.code.commands.CommandInfo` in those files that extend `me.monmcgt.code.commands.CommandAbstract` (e.g. <a href="https://github.com/Monmcgt/Lunar-Agent/blob/cc9ba6aaf0e052e3510540d990f710ff23a57af5/src/main/java/me/monmcgt/code/commands/impl/overlay/BedwarsOverlay%24Command.kt#L17">BedwarsOverlay$Command.kt</a>
+Take a look at `@me.monmcgt.code.commands.CommandInfo` in those files that extend `me.monmcgt.code.commands.CommandAbstract` (e.g. <a href="https://github.com/Monmcgt/Lunar-Agent/blob/cc9ba6aaf0e052e3510540d990f710ff23a57af5/src/main/java/me/monmcgt/code/commands/impl/overlay/BedwarsOverlay%24Command.kt#L17">BedwarsOverlay$Command.kt</a>)
 #### For Example: `/lunaragent bedwars` can be shortened to `/la bw`
 
 <br>
